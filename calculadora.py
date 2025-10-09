@@ -11,7 +11,16 @@ while True:
     elif opc == 1:
         def sumarNumero(a,b):
             return a+b
-        a=int(input("ingrese un numero:"))
-        b=int(input("ingrese un numero:"))
+        print("|veo que quieres sumar|")
+        a=str(input("ingrese un numero:"))
+        b=str(input("ingrese un numero:"))
         print(f"la suma de los numero es {sumarNumero}")
+    elif opc == 2:
+        def restarNumero(a,b):
+            return a-b
+        print("|veo que quieres restar")
+        a=str(input("ingrese un numero"))
+        b=str(input("ingrese un numero"))
+        print(f"la resta de los numero es {restarNumero}")
+        
             
