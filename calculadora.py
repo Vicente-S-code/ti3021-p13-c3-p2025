@@ -11,7 +11,7 @@ def dividir(a, b):
     return a / b  # OJO: si b es 0, dará error (versión básica)
 
 def mostrar_menu():
-    print("=== CALCULADORA ===")
+    print("===| CALCULADORA |===")
     print("1) SUMAR")
     print("2) RESTAR")
     print("3) MULTIPLICAR")
@@ -43,6 +43,6 @@ while True:
             resultado = dividir(a, b)
             print("Resultado de la división:", resultado)
     else:
-        print("Opción inválida. Elige del 1 al 5.")
+        print("Opción inválida. Recuerda que solo hay opciones del 1 al 5.")
         
             
