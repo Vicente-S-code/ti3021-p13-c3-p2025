@@ -9,7 +9,7 @@ root: Tk = Tk()
 
 # Configuración general
 root.title("💖 Mensaje Especial")
-root.geometry("720x450")          # Tamaño de ventana
+root.geometry("750x450")          # Tamaño de ventana
 root.resizable(False, False)       # Fijar tamaño (opcional)
 root.configure(bg="#0f1228")       # Color de fondo base
 
@@ -56,8 +56,8 @@ dibujar_degradado_vertical(
     canvas,
     color1="#1c1f4a",   # arriba (azul/violeta oscuro)
     color2="#8a2c6c",   # abajo (magenta/rosado)
-    ancho=720,
-    alto=450,
+    ancho=1000,
+    alto=600,
     pasos=160
 )
 
@@ -105,18 +105,18 @@ frame1.place(relx=0.5, rely=0.85, anchor="center")  # posición inferior centrad
 # ===============================
 # Sombra (para dar relieve)
 canvas.create_text(
-    360, 180, text="TE AMO", fill="#000000",
+    360, 180, text="", fill="#000000",
     font=("Georgia", 64, "bold")
 )
 # Texto frontal
 canvas.create_text(
-    360, 176, text="TE AMO", fill="#ffe8f2",
+    360, 176, text="VUELVE PORFAVOR", fill="#ffe8f2",
     font=("Georgia", 64, "bold")
 )
 
 # Subtítulo opcional
 canvas.create_text(
-    360, 235, text="ANGELO", fill="#ffe8f2",
+    360, 235, text="ATTE: VIXO", fill="#ffe8f2",
     font=("Arial", 18, "italic")
 )
 
