@@ -110,13 +110,13 @@ canvas.create_text(
 )
 # Texto frontal
 canvas.create_text(
-    360, 176, text="VUELVE PORFAVOR", fill="#ffe8f2",
+    400, 200, text="TE EXTRAÑO", fill="#ffe8f2",
     font=("Georgia", 64, "bold")
 )
 
 # Subtítulo opcional
 canvas.create_text(
-    360, 235, text="ATTE: VIXO", fill="#ffe8f2",
+    360, 250, text="ATTE: VIXO", fill="#ffe8f2",
     font=("Arial", 18, "italic")
 )
 
