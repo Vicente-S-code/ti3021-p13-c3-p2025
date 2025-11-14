@@ -20,7 +20,14 @@ with oracledb.connect(user = username,
 def get_connection():
    return oracledb.connect(iuser=username, password=password, dsn=dsn)
 
-def create_schema():  
+def create_schema(query):  
+        try:
+            with get_connection() as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(query)
+                    print(f"Tabla creada \n {query}")
+        except oracledb.DatabaseError as error:
+            print(f"No se pudo crear la tabla {error}")
            
         tables = [
         (  
@@ -33,15 +40,41 @@ def create_schema():
              ")"
         ),
         (
-        )
-
-
-        ]
-        for query in tables:
-        try:         
-            with get_connection() as connection:             
-             with connection.cursor() as cursor:                 
-              cursor.execute(query)                 
-              print("Tabla 'personas' creada.")     
-        except oracledb.DatabaseError as error:                  
-            print(f"No se pudo crear la tabla: {error}") 
+            "CREATE TABLES"
+            "ESTUDIANTE ("
+            "id_estudiante integer primary key,"
+            "carrea varchar(100),"
+            "anioingreso date"
+            ");"
+        ),
+        (
+            "CREATE TABLE"
+            "DOCENTE("
+            "id_docente interger primary key,"
+            "especialidad varchar(100)"
+            ");"
+        ),
+        (
+            "CREATE TABLE"
+            "INVESTIGADOR("
+            "id_investigador interger primary key,"
+            "lineadeinvestigacion varchar (100)"
+            ");"
+        ),
+        (
+            "CREATE TABLE"
+            "LIBRO("
+            "id_libro interger primary key"
+            "nombre varchar(100),"
+            "codlibro varchar(20),"
+            "disponible boolean,"
+            "id_estudiantefk interger,"
+            "foreing key id_estudiantefk references ESTUDIANTE(id_estudiante),"
+            "id_docentefk interger," 
+            "foreing key id_docentefk references DOCENTE(id_docente)"
+            ");"       
+        ),
+        
+         ]
+        
+      
