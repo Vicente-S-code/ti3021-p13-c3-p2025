@@ -77,4 +77,58 @@ def create_schema(query):
         
          ]
         
-      
+        def create_usuario(
+                id,
+                nombre,
+                rut,
+                correoinstitucional
+        ):
+            sql = (
+                "INSER INTO USUARIO (id, nombre, rut, correoinstitucional)"
+                "VALUES (:id, :nombre, :rut, :correoinstitucional)"
+            )
+
+            parametros = {
+                "id": id,
+                "nombre": nombre,
+                "rut": rut,
+                "correoinstitucional": correoinstitucional
+            }
+        from datetime import datetime
+        def create_estudiante(
+                id_estudiante,
+                carrera,
+                anioingreso
+        ):
+            sql = (
+                "INSER INTO ESTUDIANTE(id_estudiante, carrea, anioingreso)"
+                "VALUES (:id_estudiante, :carrera, :anioingreso)"
+            )
+
+            parametros = {
+                "id_estudiante": id_estudiante,
+                "carrera": carrera,
+                "anioingreso": datetime.strptime(anioingreso, '%d-%m-%Y')
+            }
+
+        def create_docente(
+                id_codente,
+                especialidad
+        ):
+            pass
+
+        def create_investigador(
+                id_investigador,
+                lineadeinvestigacion
+        ):
+            pass
+
+        def create_libro(
+                id_libro,
+                nombre,
+                codlibro,
+                disponible,
+                id_estudiantefk,
+                id_docentefk
+        ):
+            pass
