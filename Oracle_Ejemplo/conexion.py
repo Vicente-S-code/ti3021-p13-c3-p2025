@@ -73,9 +73,8 @@ def create_schema(query):
             "id_docentefk interger," 
             "foreing key id_docentefk references DOCENTE(id_docente)"
             ");"       
-        ),
-        
-         ]
+        )
+        ]
         
         def create_usuario(
                 id,
@@ -112,16 +111,31 @@ def create_schema(query):
             }
 
         def create_docente(
-                id_codente,
+                id_docente,
                 especialidad
         ):
-            pass
+            sql = (
+                "INSER INTO DOCENTE(id_docente, especialidad)"
+                "VALUES (:id_docente, :especialidad)"
+             ) 
 
+            parametros = {
+                "id_docente": id_docente,
+                "especialidad": especialidad
+            }    
         def create_investigador(
                 id_investigador,
                 lineadeinvestigacion
         ):
-            pass
+            sql = (
+                "INSER INTO INVESTIGADOR(id_investigador, lineadeinvestigacion)"
+                "VALUES (:id_investigador, :lineadeinvestigacion)"
+            )
+
+            parametros = {
+                "id_investigador": id_investigador,
+                "lineadeinestigacion": lineadeinvestigacion
+            }
 
         def create_libro(
                 id_libro,
@@ -131,4 +145,59 @@ def create_schema(query):
                 id_estudiantefk,
                 id_docentefk
         ):
+            sql = (
+                "INSER INTO LIBRO(id_libro, nombre, codlibro, disponible, id_estudiantefk, id_docentefk)"
+                "VALUES(:id_libro, :nombre, :codlibro, :disponible, :id_estudiantefk, :id_docentefk)"
+            )
+
+            parametros = {
+                "id_libro": id_libro,
+                "nombre": nombre,
+                "codlibro": codlibro,
+                "disponible": disponible,
+                "id_estudiantefk": id_estudiantefk,
+                "id_docentefk": id_docentefk
+            }
+
+            try:
+                with get_connection() as connection:
+                    with connection.cursor() as cursor:
+                        cursor.execute(sql, parametros)
+                    connection.commit()
+                    print("Inserccion de datos correcta")
+            except oracledb.DatabaseError as error:
+                print(f"No se pudo insertar el dato {error} /n {sql} /n {parametros} " )
+
+# READ - LECTURA DE DATOS
+
+        def read_usuarios():
+            sql = (
+                "SELECT * FROM USUARIOS WHERE id = :id"
+            )
+            parametros = {"id" : id}
+        def read_usuario_by_id(id : int):
             pass
+
+        def read_estudiantes():
+            pass
+
+        def read_estudiante_by_id(id_estudiante: int):
+            pass
+
+        def read_docentes():
+            pass
+
+        def read_docente_by_id(id_docente: int):
+            pass
+
+        def read_investigadores():
+            pass
+
+        def read_investigador_by_id(id_investigador : int):
+            pass
+
+        def read_libro():
+            pass
+
+        def read_libro_by_id(id_libro : int):  
+            pass          
