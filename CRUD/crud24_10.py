@@ -187,7 +187,8 @@ while True:
       """
       )
    
-   opcion = input("|||--|Ingrese una opcion|--|||")
+   opcion = input("|||--|Ingrese una opcion|--|||\n"
+   ">>> ")
  
    if opcion == "1":
       create_persona()
