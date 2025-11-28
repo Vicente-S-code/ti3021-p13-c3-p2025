@@ -441,8 +441,45 @@ def delete_libro(id_libro: int):
         print(f"No se pudo eliminar el dato {error} /n {sql} /n {parametros} " )
     
 def main():
-    pass
-        
+    while True:
+         os.system("cls")
+         print(
+              """
+              =================================
+              |    CRUD : Oracle + Python     |
+              ---------------------------------
+              | 1. Crear tablas               |
+              | 2. Insertar datos de ejemplo  |
+              | 3. Actualizar datos de ejemplo|
+              | 4. Eliminar datos de ejemplo  |
+              | 0. Salir                      |
+              |===============================|
+              """
+             )
+         opcion = input("Seleccione una opcion 1-4 (0 para Salir) \n"
+         ">>> ")
+
+         if opcion == "1":
+             create_all_tables()
+
+         elif opcion == "2":
+              pass
+         
+         elif opcion == "3":
+              pass
+         
+         elif opcion == "4":
+              pass
+         
+         elif opcion == "0":
+              print("Saliendo del programa...")
+              
+         else:
+              print("Opcion no valida, por favor, seleccione una opcion del menu")
+              print("========|Presiona |ENTER| para continuar|========")
+            
+
+         
 if __name__ == "__main__":
     main()
          

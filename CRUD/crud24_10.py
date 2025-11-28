@@ -74,9 +74,9 @@ def create_persona():
    digito_verificador: str = input("ingrese digito verificador:")
    nombres: str = input ("ingrese nombres de la persona:")
    apellidos: str = input ("ingrese apellidos de la persona:")
-   dia_nacimiento: int = int(input("ingrese el dia de nacimiento"))
-   mes_nacimiento: int = int(input("ingrese el mes de nacimiento"))
-   anio_nacimiento: int = int(input("ingrese el año de nacimiento"))
+   dia_nacimiento: int = int(input("ingrese el dia de nacimiento: "))
+   mes_nacimiento: int = int(input("ingrese el mes de nacimiento: "))
+   anio_nacimiento: int = int(input("ingrese el año de nacimiento:"))
    fecha_nacimiento: date = date ("year=anio_nacimiento, month=mes_nacimiento, day=dia_nacimiento")
    cod_area: int = int(input("ingrese codigo de area del numero de telefono:"))
    telefono: int = int(input("ingrese numero de telefono sin codigo de area:")) 
@@ -86,6 +86,9 @@ def create_persona():
      digito_verificador,
      nombres,
      apellidos,
+     dia_nacimiento,
+     mes_nacimiento,
+     anio_nacimiento,
      fecha_nacimiento,
      cod_area,
      telefono    
