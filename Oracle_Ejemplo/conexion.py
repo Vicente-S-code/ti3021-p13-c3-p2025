@@ -200,9 +200,19 @@ def create_libro(
 
 def read_usuarios():
             sql = (
-                "SELECT * FROM USUARIOS WHERE id = :id"
+                "SELECT * FROM USUARIO"
             )
-            parametros = {"id" : id}
+            
+            try:
+                with get_connection() as connection:
+                    with connection.cursor() as cursor:
+                        print(sql)
+                        resultado = cursor.execute(sql)
+                        for fila in resultado:
+                            print(fila)
+            except oracledb.DatabaseError as error:
+                        print(f"No se pudo leer el dato {error} /n {sql} " )
+
 def read_usuario_by_id(id : int):
             sql = (
                 "SELECT * FROM USUARIOS WHERE id = :id"
@@ -439,47 +449,323 @@ def delete_libro(id_libro: int):
         print(f"No se pudo eliminar el dato {error} /n {sql} /n {parametros} " )
         error = e
         print(f"No se pudo eliminar el dato {error} /n {sql} /n {parametros} " )
-    
+# MENUS PARA CADA TABLA
+def menu_usuarios():
+    while True:
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |         Menu: Usuarios          |
+                |----------------------------------|
+                | 1. Insertar un dato              |
+                | 2. Consultar todos los datos     |
+                | 3. Consultar dato por ID         |
+                | 4. Modificar un dato             |
+                | 5. Eliminar un dato              |
+                | 0. Volver al menu principal      |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-5, 0]: ")
+        if opcion == "1":
+            os.system("cls")
+            print("1. Insertar un dato")
+            id = input("Ingrese id del usuario: ")
+            nombre = input("Ingrese nombre del usuario: ")
+            rut = input("Ingrese rut del usuario: ")
+            correoinstitucional = input("Ingrese correo institucional del usuario: ")
+            create_usuario(id, nombre, rut, correoinstitucional)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            os.system("cls")
+            print("2. Consultar todos los datos")
+            read_usuarios()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "3":
+            os.system("cls")
+            print("3. Consultar dato por ID ")
+            id = input("Ingrese id del usuario: ")
+            read_usuario_by_id(id)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "4":
+            os.system("cls")
+            print("4. Modificar un dato")
+            id = input("Ingrese id del usuario: ")
+            print("[Sólo ingrese los datos a modificar del usuario]")
+            nombre = input("Ingrese nombre del usuario (opcional): ")
+            rut = input("Ingrese rut del usuario (opcional): ")
+            correoinstitucional = input("Ingrese correo institucional del usuario (opcional): ")
+            if len(nombre.strip()) == 0: nombre = None
+            if len(rut.strip()) == 0: rut = None
+            if len(correoinstitucional.strip()) == 0: correoinstitucional = None
+            update_usuario(id, nombre, rut, correoinstitucional)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "5":
+            os.system("cls")
+            print("5. Eliminar un dato")
+            id = input("Ingrese id del usuario: ")
+            delete_usuario(id)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "0":
+            os.system("cls")
+            print("Volviendo al menú principal...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
+
+def menu_estudiantes():
+    while True:
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |       Menu: Estudiantes         |
+                |----------------------------------|
+                | 1. Insertar un dato              |
+                | 2. Consultar todos los datos     |
+                | 3. Consultar dato por ID         |
+                | 4. Eliminar un dato              |
+                | 0. Volver al menu principal      |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-4, 0]: ")
+        if opcion == "1":
+            os.system("cls")
+            print("1. Insertar un dato")
+            id_estudiante = input("Ingrese id del estudiante: ")
+            carrera = input("Ingrese carrera del estudiante: ")
+            anioingreso = input("Ingrese año de ingreso del estudiante (dd-mm-yyyy): ")
+            create_estudiante(id_estudiante, carrera, anioingreso)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            os.system("cls")
+            print("2. Consultar todos los datos")
+            read_estudiantes()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "3":
+            os.system("cls")
+            print("3. Consultar dato por ID ")
+            id_estudiante = input("Ingrese id del estudiante: ")
+            read_estudiante_by_id(id_estudiante)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "4":
+            os.system("cls")
+            print("4. Eliminar un dato")
+            id_estudiante = input("Ingrese id del estudiante: ")
+            delete_estudiante(id_estudiante)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "0":
+            os.system("cls")
+            print("Volviendo al menú principal...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
+
+def menu_docentes():
+    while True:
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |        Menu: Docentes           |
+                |----------------------------------|
+                | 1. Insertar un dato              |
+                | 2. Consultar todos los datos     |
+                | 3. Consultar dato por ID         |
+                | 4. Eliminar un dato              |
+                | 0. Volver al menu principal      |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-4, 0]: ")
+        if opcion == "1":
+            os.system("cls")
+            print("1. Insertar un dato")
+            id_docente = input("Ingrese id del docente: ")
+            especialidad = input("Ingrese especialidad del docente: ")
+            create_docente(id_docente, especialidad)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            os.system("cls")
+            print("2. Consultar todos los datos")
+            read_docentes()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "3":
+            os.system("cls")
+            print("3. Consultar dato por ID ")
+            id_docente = input("Ingrese id del docente: ")
+            read_docente_by_id(id_docente)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "4":
+            os.system("cls")
+            print("4. Eliminar un dato")
+            id_docente = input("Ingrese id del docente: ")
+            delete_docente(id_docente)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "0":
+            os.system("cls")
+            print("Volviendo al menú principal...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
+
+def menu_investigadores():
+    while True:
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |      Menu: Investigadores       |
+                |----------------------------------|
+                | 1. Insertar un dato              |
+                | 2. Consultar todos los datos     |
+                | 3. Consultar dato por ID         |
+                | 4. Eliminar un dato              |
+                | 0. Volver al menu principal      |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-4, 0]: ")
+        if opcion == "1":
+            os.system("cls")
+            print("1. Insertar un dato")
+            id_investigador = input("Ingrese id del investigador: ")
+            lineadeinvestigacion = input("Ingrese línea de investigación del investigador: ")
+            create_investigador(id_investigador, lineadeinvestigacion)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            os.system("cls")
+            print("2. Consultar todos los datos")
+            read_investigadores()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "3":
+            os.system("cls")
+            print("3. Consultar dato por ID ")
+            id_investigador = input("Ingrese id del investigador: ")
+            read_investigador_by_id(id_investigador)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "4":
+            os.system("cls")
+            print("4. Eliminar un dato")
+            id_investigador = input("Ingrese id del investigador: ")
+            delete_investigador(id_investigador)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "0":
+            os.system("cls")
+            print("Volviendo al menú principal...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
+
+def menu_libros():
+    while True:
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |         Menu: Libros            |
+                |----------------------------------|
+                | 1. Insertar un dato              |
+                | 2. Consultar todos los datos     |
+                | 3. Consultar dato por ID         |
+                | 4. Eliminar un dato              |
+                | 0. Volver al menu principal      |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-4, 0]: ")
+        if opcion == "1":
+            os.system("cls")
+            print("1. Insertar un dato")
+            id_libro = input("Ingrese id del libro: ")
+            nombre = input("Ingrese nombre del libro: ")
+            codlibro = input("Ingrese código del libro: ")
+            disponible = input("Ingrese disponibilidad del libro (true/false): ")
+            id_estudiantefk = input("Ingrese id del estudiante (opcional): ")
+            id_docentefk = input("Ingrese id del docente (opcional): ")
+            if len(id_estudiantefk.strip()) == 0: id_estudiantefk = None
+            if len(id_docentefk.strip()) == 0: id_docentefk = None
+            create_libro(id_libro, nombre, codlibro, disponible, id_estudiantefk, id_docentefk)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            os.system("cls")
+            print("2. Consultar todos los datos")
+            read_libro()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "3":
+            os.system("cls")
+            print("3. Consultar dato por ID ")
+            id_libro = input("Ingrese id del libro: ")
+            read_libro_by_id(id_libro)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "4":
+            os.system("cls")
+            print("4. Eliminar un dato")
+            id_libro = input("Ingrese id del libro: ")
+            delete_libro(id_libro)
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "0":
+            os.system("cls")
+            print("Volviendo al menú principal...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
+
 def main():
     while True:
-         os.system("cls")
-         print(
-              """
-              =================================
-              |    CRUD : Oracle + Python     |
-              ---------------------------------
-              | 1. Crear tablas               |
-              | 2. Insertar datos de ejemplo  |
-              | 3. Actualizar datos de ejemplo|
-              | 4. Eliminar datos de ejemplo  |
-              | 0. Salir                      |
-              |===============================|
-              """
-             )
-         opcion = input("Seleccione una opcion 1-4 (0 para Salir) \n"
-         ">>> ")
+        os.system("cls")
+        print(
+            """
+                ====================================
+                |     CRUD: Oracle + Python        |
+                |----------------------------------|
+                | 1. Crear todas las tablas        |
+                | 2. Gestionar tabla Usuarios      |
+                | 3. Gestionar tabla Estudiantes   |
+                | 4. Gestionar tabla Docentes      |
+                | 5. Gestionar tabla Investigadores|
+                | 6. Gestionar tabla Libros        |
+                | 0. Salir del sistema             |
+                ====================================
+            """
+        )
+        opcion = input("Elige una opción [1-6, 0]: ")
 
-         if opcion == "1":
-             create_all_tables()
+        if opcion == "1":
+            os.system("cls")
+            create_all_tables()
+            input("Ingrese ENTER para continuar...")
+        elif opcion == "2":
+            menu_usuarios()
+        elif opcion == "3":
+            menu_estudiantes()
+        elif opcion == "4":
+            menu_docentes()
+        elif opcion == "5":
+            menu_investigadores()
+        elif opcion == "6":
+            menu_libros()
+        elif opcion == "0":
+            os.system("cls")
+            print("Saliendo del programa...")
+            break
+        else:
+            os.system("cls")
+            print("Opción incorrecta, intente nuevamente.")
+            input("Ingrese ENTER para continuar...")
 
-         elif opcion == "2":
-              pass
-         
-         elif opcion == "3":
-              pass
-         
-         elif opcion == "4":
-              pass
-         
-         elif opcion == "0":
-              print("Saliendo del programa...")
-              
-         else:
-              print("Opcion no valida, por favor, seleccione una opcion del menu")
-              print("========|Presiona |ENTER| para continuar|========")
-            
 
-         
 if __name__ == "__main__":
     main()
-         
