@@ -1,7 +1,3 @@
-# Como instalar pygame en el cmd
-pip install pygame
-
-
 import pygame, sys
 
 pygame.init()
