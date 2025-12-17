@@ -308,8 +308,3 @@ if __name__ == "__main__":
             break
         else:
             print("\n Opcion no valida. Por favor ingrese un numero del 1 al 7....")
-        
-        
-
-
-
