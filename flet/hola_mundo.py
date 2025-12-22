@@ -17,20 +17,9 @@ class App:
 if __name__ == "__main__":
     ft.app(target=App)
 
-# 4. paso: agregar audio
-self.page.add(
-ft.Audio(
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        autoplay=True,
-        controls=True,
-         )
-     )
-# 5. paso: agregar video
-self.page.add(
-       ft.Video(
-             src="https://www.w3schools.com/html/mov_bbb.mp4",
-             autoplay=False,
-            controls=True,
-        )
-     )
+# Para ejecutar la aplicación, usar el siguiente comando en la terminal:
+# flet run flet/hola_mundo.py
+
+
+    
 
